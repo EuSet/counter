@@ -5,6 +5,8 @@ import {Counter} from "./Counter";
 
 function App() {
   const [value, setValue] = useState<number>(0)
+  const [startValue, setStartValue] = useState<number>(0)
+  const [maxValue, setMaxValue] = useState<number>(0)
   useEffect(() => {
     const valueAsString = localStorage.getItem('counterValue')
     if(valueAsString){
@@ -15,26 +17,28 @@ function App() {
     useEffect(() => {
         localStorage.setItem('counterValue', JSON.stringify(value))
     },[value])
-  const counterPlus = () => {
-    if(value < 5){
+
+  const buttonIncFunction = () => {
       setValue(value+1)
-    }
+  }
+  const buttonResetFunction = () => {
+    setValue(0)
   }
 
-  const universalFunction = () => {
-    if(value < 5){
-      setValue(value+1)
-    }else {
-      setValue(0)
-    }
-  }
   return (
       <div className="App">
+        <div>
+         <span>Max value</span> <input value={maxValue} onChange={(e) => {setMaxValue(e.currentTarget.valueAsNumber)}} type="number"/>
+          <span>Min value</span><input value={startValue} onChange={(e) => {setStartValue(e.currentTarget.valueAsNumber)}} type="number"/>
+          <button onClick={() => {setValue(startValue)
+          }} >Set</button>
+        </div>
         <Counter
+            maxValue={maxValue}
             value={value}
-            counterPlus={counterPlus}
             setValue={setValue}
-            universalFunction={universalFunction}
+            buttonIncFunction={buttonIncFunction}
+            buttonResetFunction={buttonResetFunction}
         />
       </div>
   );

@@ -3,7 +3,7 @@ import React from 'react';
 type PropsType = {
     value:number
     title:string
-    disabled:boolean
+    disabled?:boolean
     universalFunction:() => void
 
 }

@@ -3,9 +3,10 @@ import {UniversalButton} from "./UniversalButton";
 
 type PropsType = {
     value: number
-    counterPlus: () => void
+    maxValue:number
     setValue:(value:number) => void
-    universalFunction:() => void
+    buttonIncFunction:() => void
+    buttonResetFunction:() => void
 }
 const inputStyle = {
     padding: '20px',
@@ -20,19 +21,16 @@ export const Counter = (props:PropsType) => {
             <input style={inputStyle} value={props.value}/>
         </div>
         <div>
-            {/*<button disabled={props.value === 5} onClick={() => {props.counterPlus()}}>inc</button>*/}
-            {/*<button disabled={props.value < 5} onClick={() => {props.setValue(0)}}>reset</button>*/}
             <UniversalButton
                 value={props.value}
                 title={'inc'}
-                disabled={props.value === 5}
-                universalFunction={props.universalFunction}
+                disabled={props.value === props.maxValue}
+                universalFunction={props.buttonIncFunction}
             />
             <UniversalButton
                 value={props.value}
                 title={'reset'}
-                disabled={props.value < 5}
-                universalFunction={props.universalFunction}
+                universalFunction={props.buttonResetFunction}
             />
         </div>
 

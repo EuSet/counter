@@ -3,11 +3,13 @@ import {UniversalButton} from "./UniversalButton";
 
 type PropsType = {
     value: number
+    maxValue:number
     startValue: number
     maxInputValue: number
     setValue: (value: number) => void
     buttonIncFunction: () => void
     buttonResetFunction: () => void
+    typeValue:boolean
 }
 const inputStyle = {
     padding: '20px',
@@ -22,11 +24,13 @@ const inputErrorStyle = {
 const containerStyle = {
     display: 'inline-block'
 }
+
 export const Counter = (props: PropsType) => {
+    const inputValue = props.typeValue  ? props.maxValue <= props.startValue || props.startValue <= props.maxValue ? 'incorrect value!' : 'enter values and press set' : props.value
     return <div style={containerStyle}>
         <div>
-            <input style={props.startValue > -1 ? inputStyle : inputErrorStyle} value={props.startValue > -1 ? props.value : 'incorrect value!'}
-                   type={props.startValue > 0 ? "number" : "text"}/>
+            <input style={props.maxValue <= props.startValue || props.startValue <= props.maxValue ? inputErrorStyle : inputStyle} value={inputValue}
+                   type={props.typeValue ? "text" : "number"}/>
         </div>
         <div>
             <UniversalButton

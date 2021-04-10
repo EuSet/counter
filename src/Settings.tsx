@@ -10,7 +10,7 @@ type PropsType = {
     addStartValue: (e: React.ChangeEvent<HTMLInputElement>) => void,
     buttonOnClick: () => void
 }
-const spanStyle: React.CSSProperties = {color:'#F50057', fontWeight:'bold',paddingLeft:'20px'}
+const spanStyle: React.CSSProperties = {color:'#F50057', fontWeight:'bold',paddingLeft:'18px'}
 
 export const Settings = (props: PropsType) => {
     return <div>

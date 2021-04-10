@@ -11,6 +11,7 @@ type PropsType = {
     buttonIncFunction: () => void
     buttonResetFunction: () => void
     typeValue:boolean
+    setShowCounter:(toggle:boolean) => void
 }
 
 export const Counter = (props: PropsType) => {
@@ -33,6 +34,10 @@ export const Counter = (props: PropsType) => {
                 value={props.value}
                 title={'reset'}
                 universalFunction={props.buttonResetFunction}
+            />
+            <UniversalButton
+                title={'Set'}
+                universalFunction={() => {props.setShowCounter(true)}}
             />
         </div>
 

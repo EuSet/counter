@@ -4,7 +4,7 @@ import {Button} from "@material-ui/core";
 type PropsType = {
     value?:number
     title:string
-    disabled:boolean
+    disabled?:boolean
     universalFunction:() => void
 
 }

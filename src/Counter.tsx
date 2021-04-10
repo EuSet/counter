@@ -1,5 +1,6 @@
 import React from 'react';
 import {UniversalButton} from "./UniversalButton";
+import c from './Counter.module.css'
 
 type PropsType = {
     value: number
@@ -11,35 +12,24 @@ type PropsType = {
     buttonResetFunction: () => void
     typeValue:boolean
 }
-const inputStyle = {
-    padding: '20px',
-    textAlign: 'center' as 'center'
-}
-const inputErrorStyle = {
-    padding: '20px',
-    textAlign: 'center' as 'center',
-    color:'red',
-    fontSize: '15px'
-}
-const containerStyle = {
-    display: 'inline-block'
-}
 
 export const Counter = (props: PropsType) => {
-    const inputValue = props.typeValue  ? props.maxValue <= props.startValue || props.startValue <= props.maxValue ? 'incorrect value!' : 'enter values and press set' : props.value
-    return <div style={containerStyle}>
+    const valueCondition = props.maxValue <= props.startValue || props.startValue < 0
+    const inputValue = props.typeValue  ? valueCondition ? 'incorrect value!' : 'enter values and press set' : props.value
+    return <div className={c.containerStyle}>
         <div>
-            <input style={props.maxValue <= props.startValue || props.startValue <= props.maxValue ? inputErrorStyle : inputStyle} value={inputValue}
+            <input style={props.maxValue === props.value ? {color:'#F50057'} : {}} className={valueCondition ? c.inputErrorStyle : c.inputTextStyle} value={inputValue}
                    type={props.typeValue ? "text" : "number"}/>
         </div>
         <div>
             <UniversalButton
                 value={props.value}
                 title={'inc'}
-                disabled={props.value === props.maxInputValue}
+                disabled={props.value === props.maxInputValue || props.typeValue}
                 universalFunction={props.buttonIncFunction}
             />
             <UniversalButton
+                disabled={props.typeValue}
                 value={props.value}
                 title={'reset'}
                 universalFunction={props.buttonResetFunction}

@@ -1,5 +1,9 @@
+body{
+  background-color: #fff9c4;
+}
 .App {
   text-align: center;
+  height: 1024px;
 }
 .error{
   color: red;

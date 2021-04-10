@@ -1,0 +1,19 @@
+.inputTextStyle{
+    width: 200px;
+    text-align: center;
+    color: black;
+    border: 0;
+    font-size: 17px;
+    font-weight: bold;
+    background-color: #90a4ae;
+}
+.inputErrorStyle {
+    width: 200px;
+    text-align: center;
+    color: red;
+    border: 0;
+    font-size: 17px;
+    font-weight: bold;
+    background-color: #90a4ae;
+
+}

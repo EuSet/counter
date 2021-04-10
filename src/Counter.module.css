@@ -1,0 +1,30 @@
+.containerStyle {
+    display: inline-block
+}
+.inputStyle {
+    width: 300px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    border: 0;
+    background-color: #90a4ae;
+}
+.inputTextStyle{
+    width: 300px;
+    text-align: center;
+    color: black;
+    border: 0;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #90a4ae;
+}
+.inputErrorStyle {
+    width: 300px;
+    text-align: center;
+    color: red;
+    border: 0;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #90a4ae;
+
+}

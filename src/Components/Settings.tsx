@@ -1,5 +1,5 @@
 import React from 'react'
-import {UniversalButton} from "./UniversalButton";
+import {UniversalButton} from "./Common/UniversalButton";
 import s from './Settings.module.css'
 
 type PropsType = {

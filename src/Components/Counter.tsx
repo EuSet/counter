@@ -1,5 +1,5 @@
 import React from 'react';
-import {UniversalButton} from "./UniversalButton";
+import {UniversalButton} from "./Common/UniversalButton";
 import c from './Counter.module.css'
 
 type PropsType = {
@@ -12,6 +12,7 @@ type PropsType = {
     buttonResetFunction: () => void
     typeValue:boolean
     setShowCounter:(toggle:boolean) => void
+    displayOptions:boolean
 }
 
 export const Counter = (props: PropsType) => {
@@ -35,10 +36,11 @@ export const Counter = (props: PropsType) => {
                 title={'reset'}
                 universalFunction={props.buttonResetFunction}
             />
-            <UniversalButton
+            {props.displayOptions ? <UniversalButton
                 title={'Set'}
                 universalFunction={() => {props.setShowCounter(true)}}
-            />
+            /> : null }
+
         </div>
 
     </div>

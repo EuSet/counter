@@ -81,10 +81,9 @@ export const reducer = (state: InitialStateType, action: ActionType): InitialSta
         case SET_SHOW_COUNTER:
             return {
                 ...state,
-                showCounter: !state.showCounter
+                showCounter: action.value
             }
         case SET_DISPLAY_OPTIONS:
-            debugger
             return {
                 ...state,
                 displayOptions: !state.displayOptions
@@ -119,6 +118,7 @@ export const setMaxValueAC = (value: number) => {
     return {type: SET_MAX_VALUE, value} as const
 }
 export const setShowCounterAC = (value: boolean) => {
+    debugger
     return {type: SET_SHOW_COUNTER, value} as const
 }
 export const setDisplayOptionsAC = (value: boolean) => {

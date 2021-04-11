@@ -58,6 +58,9 @@ function App() {
         dispatch(setTypeValueAC(false))
         dispatch(setShowCounterAC(!state.showCounter))
     }
+    const setButtonOnClick = (value:boolean) => {
+        dispatch(setShowCounterAC(value))
+    }
     const settings = <Paper style={{padding: '30px 0', margin: '30px', backgroundColor: '#90a4ae'}} elevation={3}>
         <Grid item>
             <Settings maxValue={state.maxValue} startValue={state.startValue} addMaxValue={addMaxValue}
@@ -75,7 +78,7 @@ function App() {
                 buttonResetFunction={buttonResetFunction}
                 startValue={state.startValue}
                 typeValue={state.typeValue}
-                setShowCounterAC={setShowCounterAC}
+                setShowCounterAC={setButtonOnClick}
                 displayOptions={state.displayOptions}
             />
         </Grid>

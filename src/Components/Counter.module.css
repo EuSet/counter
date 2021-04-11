@@ -2,7 +2,7 @@
     display: inline-block
 }
 .inputStyle {
-    width: 300px;
+    max-width: 300px;
     text-align: center;
     font-weight: bold;
     font-size: 30px;
@@ -10,7 +10,7 @@
     background-color: #90a4ae;
 }
 .inputTextStyle{
-    width: 300px;
+    max-width: 300px;
     text-align: center;
     color: black;
     border: 0;
@@ -19,7 +19,7 @@
     background-color: #90a4ae;
 }
 .inputErrorStyle {
-    width: 300px;
+    max-width: 300px;
     text-align: center;
     color: red;
     border: 0;

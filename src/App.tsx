@@ -1,109 +1,101 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useReducer, useState} from 'react';
 import './App.css';
 import {Counter} from "./Components/Counter";
 import {Settings} from "./Components/Settings";
 import {Grid, Paper} from "@material-ui/core";
 import {UniversalButton} from "./Components/Common/UniversalButton";
+import {
+    initialState,
+    reducer,
+    setMaxInputValueAC,
+    setMaxValueAC,
+    setNewStartValueAC,
+    setNewValueAC,
+    setShowCounterAC,
+    setStartValueAC,
+    setTypeValueAC,
+    setValueAC,
+    setValueResetAC
+} from "./Components/reducer";
 
 
 function App() {
-    const [startValue, setStartValue] = useState<number>(0)
-    const [value, setValue] = useState<number>(0)
-    const [maxValue, setMaxValue] = useState<number>(5)
-    const [maxInputValue, setMaxInputValue] = useState<number>(maxValue)
-    const [typeValue, setTypeValue] = useState<boolean>(false)
-    const [showCounter, setShowCounter] = useState<boolean>(true)
     const [displayOptions, setDisplayOptions] = useState<boolean>(false)
+
+
+    const [state, dispatch] = useReducer(reducer, initialState)
+
 
     useEffect(() => {
         const valueAsString = localStorage.getItem('counterValue')
         if (valueAsString) {
             const newValue = JSON.parse(valueAsString)
-            setValue(newValue)
+            dispatch(setNewValueAC(newValue))
         }
     }, [])
     useEffect(() => {
-        localStorage.setItem('counterValue', JSON.stringify(value))
-    }, [value])
+        localStorage.setItem('counterValue', JSON.stringify(state.value))
+    }, [state.value])
 
     const buttonIncFunction = () => {
-        setValue(value + 1)
+        dispatch(setValueAC())
     }
     const buttonResetFunction = () => {
-        setValue(startValue)
+        dispatch(setValueResetAC())
     }
     const addStartValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setStartValue(e.currentTarget.valueAsNumber)
-        setTypeValue(true)
+        dispatch(setStartValueAC(e.currentTarget.valueAsNumber))
+        dispatch(setTypeValueAC(true))
         if (e.currentTarget.valueAsNumber < 0) {
-            setMaxInputValue(value)
+            dispatch(setMaxInputValueAC(state.value))
         }
     }
     const addMaxValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setMaxValue(e.currentTarget.valueAsNumber)
-        setTypeValue(true)
+        dispatch(setMaxValueAC(e.currentTarget.valueAsNumber))
+        dispatch(setTypeValueAC(true))
     }
     const buttonOnClick = () => {
-        setValue(startValue)
-        setMaxInputValue(maxValue)
-        setTypeValue(false)
-        setShowCounter(!showCounter)
+        dispatch(setNewStartValueAC(state.startValue))
+        dispatch(setMaxInputValueAC(state.maxValue))
+        dispatch(setTypeValueAC(false))
+        dispatch(setShowCounterAC(!state.showCounter))
     }
-
+    const settings = <Paper style={{padding: '30px 0', margin: '30px', backgroundColor: '#90a4ae'}} elevation={3}>
+        <Grid item>
+            <Settings maxValue={state.maxValue} startValue={state.startValue} addMaxValue={addMaxValue}
+                      addStartValue={addStartValue} buttonOnClick={buttonOnClick} value={state.value}/>
+        </Grid>
+    </Paper>
+    const counter = <Paper style={{padding: '40px 20px', margin: '30px', backgroundColor: '#90a4ae'}} elevation={3}>
+        <Grid item>
+            <Counter
+                maxInputValue={state.maxInputValue}
+                maxValue={state.maxValue}
+                value={state.value}
+                // setValue={setValue}
+                buttonIncFunction={buttonIncFunction}
+                buttonResetFunction={buttonResetFunction}
+                startValue={state.startValue}
+                typeValue={state.typeValue}
+                setShowCounterAC={setShowCounterAC}
+                displayOptions={displayOptions}
+            />
+        </Grid>
+    </Paper>
     return (
         <div className="App">
             <UniversalButton title={'Change'} universalFunction={() => {
                 setDisplayOptions(!displayOptions)
             }}/>
-            <Grid justify={'center'} alignItems={'center'} style={{height: '512px'}} container>
-                {displayOptions ? showCounter ?
-                    <Paper style={{padding: '30px 0', margin: '30px', backgroundColor: '#90a4ae'}} elevation={3}>
-                        <Grid item>
-                            <Settings maxValue={maxValue} startValue={startValue} addMaxValue={addMaxValue}
-                                      addStartValue={addStartValue} buttonOnClick={buttonOnClick} value={value}/>
-                        </Grid>
-                    </Paper>
+            <Grid justify={'center'} alignItems={'center'} container>
+                {displayOptions ? state.showCounter ?
+                    {settings}
                     :
-                    <Paper style={{padding: '40px 0', margin: '30px', backgroundColor: '#90a4ae'}} elevation={3}>
-                        <Grid item>
-                            <Counter
-                                maxInputValue={maxInputValue}
-                                maxValue={maxValue}
-                                value={value}
-                                setValue={setValue}
-                                buttonIncFunction={buttonIncFunction}
-                                buttonResetFunction={buttonResetFunction}
-                                startValue={startValue}
-                                typeValue={typeValue}
-                                setShowCounter={setShowCounter}
-                                displayOptions={displayOptions}
-                            />
-                        </Grid>
-                    </Paper>
+                    {counter}
                     :
                     <div className={'container'}>
-                        <Paper style={{padding: '30px 0', margin: '30px', backgroundColor: '#90a4ae'}} elevation={3}>
-                            <Grid item>
-                                <Settings maxValue={maxValue} startValue={startValue} addMaxValue={addMaxValue}
-                                          addStartValue={addStartValue} buttonOnClick={buttonOnClick} value={value}/>
-                            </Grid>
-                        </Paper>
-                        <Paper style={{padding: '40px 0', margin: '30px', backgroundColor: '#90a4ae'}} elevation={3}>
-                            <Grid item>
-                                <Counter
-                                    maxInputValue={maxInputValue}
-                                    maxValue={maxValue}
-                                    value={value}
-                                    setValue={setValue}
-                                    buttonIncFunction={buttonIncFunction}
-                                    buttonResetFunction={buttonResetFunction}
-                                    startValue={startValue}
-                                    typeValue={typeValue}
-                                    setShowCounter={setShowCounter}
-                                    displayOptions={displayOptions}
-                                />
-                            </Grid>
-                        </Paper>
+                        {settings}
+                        {counter}
                     </div>}
             </Grid>
         </div>

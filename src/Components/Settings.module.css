@@ -1,5 +1,5 @@
 .inputTextStyle{
-    width: 205px;
+    max-width: 205px;
     text-align: center;
     color: black;
     border: 0;
@@ -8,7 +8,7 @@
     background-color: #90a4ae;
 }
 .inputErrorStyle {
-    width: 205px;
+    max-width: 205px;
     text-align: center;
     color: red;
     border: 0;

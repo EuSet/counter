@@ -7,11 +7,10 @@ type PropsType = {
     maxValue:number
     startValue: number
     maxInputValue: number
-    setValue: (value: number) => void
     buttonIncFunction: () => void
     buttonResetFunction: () => void
     typeValue:boolean
-    setShowCounter:(toggle:boolean) => void
+    setShowCounterAC:(toggle:boolean) => void
     displayOptions:boolean
 }
 
@@ -38,7 +37,7 @@ export const Counter = (props: PropsType) => {
             />
             {props.displayOptions ? <UniversalButton
                 title={'Set'}
-                universalFunction={() => {props.setShowCounter(true)}}
+                universalFunction={() => {props.setShowCounterAC(true)}}
             /> : null }
 
         </div>

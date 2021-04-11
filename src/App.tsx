@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer, useState} from 'react';
+import React, {useEffect, useReducer} from 'react';
 import './App.css';
 import {Counter} from "./Components/Counter";
 import {Settings} from "./Components/Settings";
@@ -7,6 +7,7 @@ import {UniversalButton} from "./Components/Common/UniversalButton";
 import {
     initialState,
     reducer,
+    setDisplayOptionsAC,
     setMaxInputValueAC,
     setMaxValueAC,
     setNewStartValueAC,
@@ -20,11 +21,8 @@ import {
 
 
 function App() {
-    const [displayOptions, setDisplayOptions] = useState<boolean>(false)
-
 
     const [state, dispatch] = useReducer(reducer, initialState)
-
 
     useEffect(() => {
         const valueAsString = localStorage.getItem('counterValue')
@@ -78,20 +76,24 @@ function App() {
                 startValue={state.startValue}
                 typeValue={state.typeValue}
                 setShowCounterAC={setShowCounterAC}
-                displayOptions={displayOptions}
+                displayOptions={state.displayOptions}
             />
         </Grid>
     </Paper>
     return (
         <div className="App">
             <UniversalButton title={'Change'} universalFunction={() => {
-                setDisplayOptions(!displayOptions)
+                dispatch(setDisplayOptionsAC(!state.displayOptions))
             }}/>
             <Grid justify={'center'} alignItems={'center'} container>
-                {displayOptions ? state.showCounter ?
+                {state.displayOptions ? state.showCounter ?
+                    <div className={'container'}>
                     {settings}
+                    </div>
                     :
+                    <div className={'container'}>
                     {counter}
+                    </div>
                     :
                     <div className={'container'}>
                         {settings}

@@ -2,7 +2,7 @@ import React from 'react';
 import {UniversalButton} from "./Common/UniversalButton";
 import c from './Counter.module.css'
 
-type PropsType = {
+export type PropsType = {
     value: number
     maxValue:number
     startValue: number

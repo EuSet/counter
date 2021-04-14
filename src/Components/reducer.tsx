@@ -7,12 +7,12 @@ type InitialStateType = {
     showCounter: boolean
     displayOptions: boolean
 }
-type ActionType = ReturnType<typeof setValueAC>
+type ActionType = ReturnType<typeof setValuePlusOneAC>
     | ReturnType<typeof setNewValueAC>
     | ReturnType<typeof setValueResetAC>
     | ReturnType<typeof setNewStartValueAC>
     | ReturnType<typeof setStartValueAC>
-    | ReturnType<typeof setTypeValueAC>
+    | ReturnType<typeof setInputTypeAC>
     | ReturnType<typeof setMaxInputValueAC>
     | ReturnType<typeof setMaxValueAC>
     | ReturnType<typeof setShowCounterAC>
@@ -26,19 +26,19 @@ export const initialState = {
     showCounter: true,
     displayOptions: true,
 }
-export const SET_VALUE = 'SET_VALUE'
+export const SET_VALUE_PLUS_ONE = 'SET_VALUE_PLUS_ONE'
 export const SET_VALUE_RESET = 'SET_VALUE_RESET'
 export const SET_NEW_VALUE = 'SET_NEW_VALUE'
 export const SET_NEW_START_VALUE = 'SET_NEW_START_VALUE'
 export const SET_START_CURRENT_VALUE = 'SET_START_CURRENT_VALUE'
-export const SET_TYPE_VALUE_TRUE = 'SET_TYPE_VALUE_TRUE'
+export const SET_INPUT_TYPE = 'SET_INPUT_TYPE'
 export const SET_MAX_INPUT_VALUE = 'SET_MAX_INPUT_VALUE'
 export const SET_MAX_VALUE = 'SET_MAX_VALUE'
 export const SET_SHOW_COUNTER = 'SET_SHOW_COUNTER'
 export const SET_DISPLAY_OPTIONS = 'SET_DISPLAY_OPTIONS'
 export const reducer = (state: InitialStateType, action: ActionType): InitialStateType => {
     switch (action.type) {
-        case SET_VALUE:
+        case SET_VALUE_PLUS_ONE:
             return {
                 ...state,
                 value: state.value + 1
@@ -63,7 +63,7 @@ export const reducer = (state: InitialStateType, action: ActionType): InitialSta
                 ...state,
                 startValue: action.currentValue
             }
-        case SET_TYPE_VALUE_TRUE:
+        case SET_INPUT_TYPE:
             return {
                 ...state,
                 typeValue: action.value
@@ -93,8 +93,8 @@ export const reducer = (state: InitialStateType, action: ActionType): InitialSta
     }
 }
 
-export const setValueAC = () => {
-    return {type: SET_VALUE} as const
+export const setValuePlusOneAC = () => {
+    return {type: SET_VALUE_PLUS_ONE} as const
 }
 export const setValueResetAC = () => {
     return {type: SET_VALUE_RESET} as const
@@ -108,8 +108,8 @@ export const setNewStartValueAC = (startValue: number) => {
 export const setStartValueAC = (currentValue: number) => {
     return {type: SET_START_CURRENT_VALUE, currentValue} as const
 }
-export const setTypeValueAC = (value: boolean) => {
-    return {type: SET_TYPE_VALUE_TRUE, value} as const
+export const setInputTypeAC = (value: boolean) => {
+    return {type: SET_INPUT_TYPE, value} as const
 }
 export const setMaxInputValueAC = (value: number) => {
     return {type: SET_MAX_INPUT_VALUE, value} as const
@@ -118,7 +118,6 @@ export const setMaxValueAC = (value: number) => {
     return {type: SET_MAX_VALUE, value} as const
 }
 export const setShowCounterAC = (value: boolean) => {
-    debugger
     return {type: SET_SHOW_COUNTER, value} as const
 }
 export const setDisplayOptionsAC = (value: boolean) => {

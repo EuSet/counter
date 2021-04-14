@@ -14,8 +14,8 @@ import {
     setNewValueAC,
     setShowCounterAC,
     setStartValueAC,
-    setTypeValueAC,
-    setValueAC,
+    setInputTypeAC,
+    setValuePlusOneAC,
     setValueResetAC
 } from "./Components/reducer";
 
@@ -36,26 +36,26 @@ function App() {
     }, [state.value])
 
     const buttonIncFunction = () => {
-        dispatch(setValueAC())
+        dispatch(setValuePlusOneAC())
     }
     const buttonResetFunction = () => {
         dispatch(setValueResetAC())
     }
     const addStartValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setStartValueAC(e.currentTarget.valueAsNumber))
-        dispatch(setTypeValueAC(true))
+        dispatch(setInputTypeAC(true))
         if (e.currentTarget.valueAsNumber < 0) {
             dispatch(setMaxInputValueAC(state.value))
         }
     }
     const addMaxValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setMaxValueAC(e.currentTarget.valueAsNumber))
-        dispatch(setTypeValueAC(true))
+        dispatch(setInputTypeAC(true))
     }
     const buttonOnClick = () => {
         dispatch(setNewStartValueAC(state.startValue))
         dispatch(setMaxInputValueAC(state.maxValue))
-        dispatch(setTypeValueAC(false))
+        dispatch(setInputTypeAC(false))
         dispatch(setShowCounterAC(!state.showCounter))
     }
     const setButtonOnClick = (value:boolean) => {

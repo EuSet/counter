@@ -1,16 +1,23 @@
 import React from 'react';
 import {Button} from "@material-ui/core";
 
-type PropsType = {
-    value?:number
-    title:string
-    disabled?:boolean
-    universalFunction:() => void
+export type PropsType = {
+    value?: number
+    title: string
+    disabled?: boolean
+    universalFunction: () => void
+    variant?: 'contained' | 'outlined' | 'text'
+    color?: 'secondary' | 'primary' | 'default' | 'inherit'
+    backgroundColor?: string
 
 }
 
-export const UniversalButton = (props:PropsType) => {
+export const UniversalButton = (props: PropsType) => {
     return (
-        <Button style={{margin:'10px'}} variant="contained" color={'secondary'}  disabled={props.disabled} onClick={() => {props.universalFunction()}}>{props.title}</Button>
+        <Button style={{margin: '10px', backgroundColor:props.backgroundColor ? props.backgroundColor : '' }} variant={props.variant ? props.variant : 'contained'}
+                color={props.color ? props.color : 'secondary'}
+                disabled={props.disabled} onClick={() => {
+            props.universalFunction()
+        }}>{props.title}</Button>
     )
 }

@@ -2,7 +2,7 @@ import React, {useReducer} from 'react'
 import {Counter, PropsType} from "./Counter";
 import {Story} from "@storybook/react";
 import {action} from "@storybook/addon-actions";
-import {initialState, reducer, SET_VALUE_PLUS_ONE, SET_VALUE_RESET} from "./reducer";
+import {initialState, counterReducer, SET_VALUE_PLUS_ONE, SET_VALUE_RESET} from "./counter-reducer";
 
 export default {
     title: 'Counter',
@@ -29,7 +29,7 @@ Primary.args = {
 };
 
 export const CounterWithReducer: Story<PropsType> = (args) => {
-    const [state, dispatch] = useReducer(reducer, initialState)
+    const [state, dispatch] = useReducer(counterReducer, initialState)
     const showSetCallBack = action('show counter setting')
 
     return <Counter maxInputValue={state.maxInputValue}

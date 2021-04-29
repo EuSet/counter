@@ -1,4 +1,4 @@
-import {reducer, SET_INPUT_TYPE, SET_NEW_START_VALUE} from "./reducer";
+import {counterReducer, SET_INPUT_TYPE, SET_NEW_START_VALUE} from "./counter-reducer";
 
 test('start value should be 7', () => {
     const initialState = {
@@ -10,7 +10,7 @@ test('start value should be 7', () => {
         showCounter: true,
         displayOptions: true,
     }
-    const newState = reducer(initialState, {type: SET_NEW_START_VALUE, startValue:7})
+    const newState = counterReducer(initialState, {type: SET_NEW_START_VALUE, startValue:7})
     expect(newState.value).toBe(7)
 })
 
@@ -24,6 +24,6 @@ test('type value to be true', () => {
         showCounter: true,
         displayOptions: true,
     }
-    const newState = reducer(initialState,  {type: SET_INPUT_TYPE, value:true})
+    const newState = counterReducer(initialState,  {type: SET_INPUT_TYPE, value:true})
     expect(newState.typeValue).toBe(true)
 })

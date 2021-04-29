@@ -1,34 +1,35 @@
-import React, {useEffect, useReducer} from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {Counter} from "./Components/Counter";
 import {Settings} from "./Components/Settings";
 import {Grid, Paper} from "@material-ui/core";
 import {UniversalButton} from "./Components/Common/UniversalButton";
-import {
-    initialState,
-    reducer,
-    setDisplayOptionsAC,
-    setMaxInputValueAC,
-    setMaxValueAC,
-    setNewStartValueAC,
-    setNewValueAC,
-    setShowCounterAC,
-    setStartValueAC,
-    setInputTypeAC,
-    setValuePlusOneAC,
-    setValueResetAC
-} from "./Components/reducer";
+import {InitialStateType} from "./Components/counter-reducer";
 
+type PropsType = {
+    state:InitialStateType,
+    setDisplayOptionsAC: (value:boolean) => void
+    setMaxInputValueAC: (value:number) => void
+    setMaxValueAC: (event: number) => void
+    setNewStartValueAC: (value:number) => void
+    setNewValueAC: (newValue: number) => void
+    setShowCounterAC: (value:boolean) => void
+    setStartValueAC: (event:number) => void
+    setInputTypeAC: (value: boolean) => void
+    setValuePlusOneAC: () => void
+    setValueResetAC: () => void
 
-function App() {
+}
 
-    const [state, dispatch] = useReducer(reducer, initialState)
+export const App: React.FC<PropsType> = ({state,...props }) => {
+
+    // const [state, dispatch] = useReducer(counterReducer, initialState)
 
     useEffect(() => {
         const valueAsString = localStorage.getItem('counterValue')
         if (valueAsString) {
             const newValue = JSON.parse(valueAsString)
-            dispatch(setNewValueAC(newValue))
+            props.setNewValueAC(newValue)
         }
     }, [])
     useEffect(() => {
@@ -36,30 +37,30 @@ function App() {
     }, [state.value])
 
     const buttonIncFunction = () => {
-        dispatch(setValuePlusOneAC())
+        props.setValuePlusOneAC()
     }
     const buttonResetFunction = () => {
-        dispatch(setValueResetAC())
+        props.setValueResetAC()
     }
     const addStartValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setStartValueAC(e.currentTarget.valueAsNumber))
-        dispatch(setInputTypeAC(true))
+        props.setStartValueAC(e.currentTarget.valueAsNumber)
+        props.setInputTypeAC(true)
         if (e.currentTarget.valueAsNumber < 0) {
-            dispatch(setMaxInputValueAC(state.value))
+            props.setMaxInputValueAC(state.value)
         }
     }
     const addMaxValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setMaxValueAC(e.currentTarget.valueAsNumber))
-        dispatch(setInputTypeAC(true))
+        props.setMaxValueAC(e.currentTarget.valueAsNumber)
+        props.setInputTypeAC(true)
     }
     const buttonOnClick = () => {
-        dispatch(setNewStartValueAC(state.startValue))
-        dispatch(setMaxInputValueAC(state.maxValue))
-        dispatch(setInputTypeAC(false))
-        dispatch(setShowCounterAC(!state.showCounter))
+        props.setNewStartValueAC(state.startValue)
+        props.setMaxInputValueAC(state.maxValue)
+        props.setInputTypeAC(false)
+        props.setShowCounterAC(!state.showCounter)
     }
     const setButtonOnClick = (value:boolean) => {
-        dispatch(setShowCounterAC(value))
+        props.setShowCounterAC(value)
     }
     const settings = <Paper style={{padding: '30px 0', margin: '30px', backgroundColor: '#90a4ae'}} elevation={3}>
         <Grid item>
@@ -86,7 +87,7 @@ function App() {
     return (
         <div className="App">
             <UniversalButton title={'Change'} universalFunction={() => {
-                dispatch(setDisplayOptionsAC(!state.displayOptions))
+                props.setDisplayOptionsAC(!state.displayOptions)
             }}/>
             <Grid justify={'center'} alignItems={'center'} container>
                 {state.displayOptions ? state.showCounter ?

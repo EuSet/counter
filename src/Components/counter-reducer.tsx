@@ -1,4 +1,4 @@
-type InitialStateType = {
+export type InitialStateType = {
     startValue: number
     value: number
     maxValue: number
@@ -7,7 +7,7 @@ type InitialStateType = {
     showCounter: boolean
     displayOptions: boolean
 }
-type ActionType = ReturnType<typeof setValuePlusOneAC>
+export type ActionType = ReturnType<typeof setValuePlusOneAC>
     | ReturnType<typeof setNewValueAC>
     | ReturnType<typeof setValueResetAC>
     | ReturnType<typeof setNewStartValueAC>
@@ -36,7 +36,8 @@ export const SET_MAX_INPUT_VALUE = 'SET_MAX_INPUT_VALUE'
 export const SET_MAX_VALUE = 'SET_MAX_VALUE'
 export const SET_SHOW_COUNTER = 'SET_SHOW_COUNTER'
 export const SET_DISPLAY_OPTIONS = 'SET_DISPLAY_OPTIONS'
-export const reducer = (state: InitialStateType, action: ActionType): InitialStateType => {
+
+export const counterReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case SET_VALUE_PLUS_ONE:
             return {

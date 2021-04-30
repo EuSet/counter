@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import {Counter} from "./Components/Counter";
 import {Settings} from "./Components/Settings";
@@ -12,7 +12,6 @@ type PropsType = {
     setMaxInputValueAC: (value:number) => void
     setMaxValueAC: (event: number) => void
     setNewStartValueAC: (value:number) => void
-    setNewValueAC: (newValue: number) => void
     setShowCounterAC: (value:boolean) => void
     setStartValueAC: (event:number) => void
     setInputTypeAC: (value: boolean) => void
@@ -23,18 +22,16 @@ type PropsType = {
 
 export const App: React.FC<PropsType> = ({state,...props }) => {
 
-    // const [state, dispatch] = useReducer(counterReducer, initialState)
-
-    useEffect(() => {
-        const valueAsString = localStorage.getItem('counterValue')
-        if (valueAsString) {
-            const newValue = JSON.parse(valueAsString)
-            props.setNewValueAC(newValue)
-        }
-    }, [])
-    useEffect(() => {
-        localStorage.setItem('counterValue', JSON.stringify(state.value))
-    }, [state.value])
+    // useEffect(() => {
+    //     const valueAsString = localStorage.getItem('counterValue')
+    //     if (valueAsString) {
+    //         const newValue = JSON.parse(valueAsString)
+    //         props.setNewValueAC(newValue)
+    //     }
+    // }, [])
+    // useEffect(() => {
+    //     localStorage.setItem('counterValue', JSON.stringify(state.value))
+    // }, [state.value])
 
     const buttonIncFunction = () => {
         props.setValuePlusOneAC()
@@ -74,7 +71,6 @@ export const App: React.FC<PropsType> = ({state,...props }) => {
                 maxInputValue={state.maxInputValue}
                 maxValue={state.maxValue}
                 value={state.value}
-                // setValue={setValue}
                 buttonIncFunction={buttonIncFunction}
                 buttonResetFunction={buttonResetFunction}
                 startValue={state.startValue}

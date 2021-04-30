@@ -8,7 +8,6 @@ export type InitialStateType = {
     displayOptions: boolean
 }
 export type ActionType = ReturnType<typeof setValuePlusOneAC>
-    | ReturnType<typeof setNewValueAC>
     | ReturnType<typeof setValueResetAC>
     | ReturnType<typeof setNewStartValueAC>
     | ReturnType<typeof setStartValueAC>
@@ -28,7 +27,6 @@ export const initialState = {
 }
 export const SET_VALUE_PLUS_ONE = 'SET_VALUE_PLUS_ONE'
 export const SET_VALUE_RESET = 'SET_VALUE_RESET'
-export const SET_NEW_VALUE = 'SET_NEW_VALUE'
 export const SET_NEW_START_VALUE = 'SET_NEW_START_VALUE'
 export const SET_START_CURRENT_VALUE = 'SET_START_CURRENT_VALUE'
 export const SET_INPUT_TYPE = 'SET_INPUT_TYPE'
@@ -48,11 +46,6 @@ export const counterReducer = (state: InitialStateType = initialState, action: A
             return {
                 ...state,
                 value: state.startValue
-            }
-        case SET_NEW_VALUE:
-            return {
-                ...state,
-                value: action.newValue
             }
         case SET_NEW_START_VALUE:
             return {
@@ -99,9 +92,6 @@ export const setValuePlusOneAC = () => {
 }
 export const setValueResetAC = () => {
     return {type: SET_VALUE_RESET} as const
-}
-export const setNewValueAC = (newValue: number) => {
-    return {type: SET_NEW_VALUE, newValue} as const
 }
 export const setNewStartValueAC = (startValue: number) => {
     return {type: SET_NEW_START_VALUE, startValue} as const
